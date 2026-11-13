@@ -1,9 +1,13 @@
 version: 1.3.13
 cache: true
 
+interface:
+  webSearch: true
+
 webSearch:
   searchProvider: tavily
   tavilyApiKey: "${TAVILY_API_KEY}"
+  scraperType: jina
   safeSearch: 1
 
 endpoints:
@@ -22,16 +26,16 @@ endpoints:
       apiKey: "${OPENROUTER_API_KEY}"
       baseURL: "https://openrouter.ai/api/v1"
       headers:
-        HTTP-Referer: "https://jesh-ai.onrender.com"
+        HTTP-Referer: "https://jeshai-librechat.onrender.com"
         X-Title: "Jesh AI"
       models:
         default:
-          - "meta-llama/llama-3.3-70b-instruct:free"
-          - "google/gemini-2.0-flash-exp:free"
-          - "deepseek/deepseek-r1:free"
-          - "qwen/qwen-2.5-72b-instruct:free"
+          - "openrouter/free"
+          - "google/gemma-3-27b-it:free"
+          - "meta-llama/llama-3.2-3b-instruct:free"
+          - "mistralai/mistral-small-3.1-24b-instruct:free"
         fetch: false
       titleConvo: true
-      titleModel: "meta-llama/llama-3.3-70b-instruct:free"
+      titleModel: "openrouter/free"
       modelDisplayLabel: "OpenRouter (Backup)"
       
