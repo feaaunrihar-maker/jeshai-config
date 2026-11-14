@@ -16,9 +16,14 @@ endpoints:
       apiKey: "${GROQ_API_KEY}"
       baseURL: "https://api.groq.com/openai/v1"
       models:
-        default: ["llama-3.3-70b-versatile"]
+        default:
+          - "llama-3.3-70b-versatile"
+          - "meta-llama/llama-4-scout-17b-16e-instruct"
+          - "llama-3.2-11b-vision-preview"
         fetch: true
       titleConvo: true
+      titleTiming: "immediate"
+      titleMethod: "completion"
       titleModel: "llama-3.3-70b-versatile"
       modelDisplayLabel: "Groq"
 
@@ -36,6 +41,7 @@ endpoints:
           - "mistralai/mistral-small-3.1-24b-instruct:free"
         fetch: false
       titleConvo: true
+      titleTiming: "immediate"
+      titleMethod: "completion"
       titleModel: "openrouter/free"
       modelDisplayLabel: "OpenRouter (Backup)"
-      
