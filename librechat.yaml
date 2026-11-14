@@ -21,8 +21,11 @@ endpoints:
         default:
           - "llama-3.3-70b-versatile"
           - "llama-3.2-11b-vision-preview"
-        fetch: false
-      titleConvo: false
+        fetch: false  # मॉडल्स को ऑटो-फ़ेच करने से रोकें
+      titleConvo: true
+      titleTiming: "immediate"
+      titleMethod: "completion"
+      titleModel: "llama-3.3-70b-versatile"  # टाइटल के लिए सही मॉडल
       modelDisplayLabel: "Jesh Smart (Groq)"
 
     - name: "OpenRouter"
@@ -34,7 +37,10 @@ endpoints:
         X-Title: "Jesh AI"
       models:
         default:
-          - "openrouter/free"
+          - "nvidia/nemotron-3-ultra-550b-a55b:free"  # एक स्पेसिफिक फ्री मॉडल
         fetch: false
-      titleConvo: false
+      titleConvo: true
+      titleTiming: "immediate"
+      titleMethod: "completion"
+      titleModel: "nvidia/nemotron-3-ultra-550b-a55b:free"
       modelDisplayLabel: "Jesh Backup (OpenRouter)"
