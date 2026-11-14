@@ -3,7 +3,7 @@ cache: true
 
 interface:
   webSearch: true
-  modelSelect: true # (या false कर दें अगर आप मॉडल का ड्रॉपडाउन पूरी तरह छिपाना चाहते हैं)
+  modelSelect: true
 
 webSearch:
   searchProvider: tavily
@@ -21,11 +21,8 @@ endpoints:
         default:
           - "llama-3.3-70b-versatile"
           - "llama-3.2-11b-vision-preview"
-        fetch: true
-      titleConvo: true
-      titleTiming: "immediate"
-      titleMethod: "completion"
-      titleModel: "llama-3.3-70b-versatile"
+        fetch: false
+      titleConvo: false
       modelDisplayLabel: "Jesh Smart (Groq)"
 
     - name: "OpenRouter"
@@ -39,8 +36,5 @@ endpoints:
         default:
           - "openrouter/free"
         fetch: false
-      titleConvo: true
-      titleTiming: "immediate"
-      titleMethod: "completion"
-      titleModel: "openrouter/free"
+      titleConvo: false
       modelDisplayLabel: "Jesh Backup (OpenRouter)"
