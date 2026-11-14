@@ -3,6 +3,7 @@ cache: true
 
 interface:
   webSearch: true
+  modelSelect: true # (या false कर दें अगर आप मॉडल का ड्रॉपडाउन पूरी तरह छिपाना चाहते हैं)
 
 webSearch:
   searchProvider: tavily
@@ -10,46 +11,36 @@ webSearch:
   scraperType: jina
   safeSearch: 1
 
-mcpServers:
-  github:
-    type: streamable-http
-    url: https://api.githubcopilot.com/mcp/
-    headers:
-      Authorization: "Bearer ${GITHUB_MCP_TOKEN}"
-    timeout: 30000
-
 endpoints:
   custom:
     - name: "Groq"
       apiKey: "${GROQ_API_KEY}"
       baseURL: "https://api.groq.com/openai/v1"
+      streamRate: 25
       models:
         default:
           - "llama-3.3-70b-versatile"
-          - "openai/gpt-oss-120b"
-          - "meta-llama/llama-4-scout-17b-16e-instruct"
-        fetch: false
+          - "llama-3.2-11b-vision-preview"
+        fetch: true
       titleConvo: true
       titleTiming: "immediate"
       titleMethod: "completion"
       titleModel: "llama-3.3-70b-versatile"
-      modelDisplayLabel: "Groq"
+      modelDisplayLabel: "Jesh Smart (Groq)"
 
     - name: "OpenRouter"
       apiKey: "${OPENROUTER_API_KEY}"
       baseURL: "https://openrouter.ai/api/v1"
+      streamRate: 25
       headers:
         HTTP-Referer: "https://jeshai-librechat.onrender.com"
         X-Title: "Jesh AI"
       models:
         default:
           - "openrouter/free"
-          - "google/gemma-3-27b-it:free"
-          - "meta-llama/llama-3.2-3b-instruct:free"
         fetch: false
       titleConvo: true
       titleTiming: "immediate"
       titleMethod: "completion"
       titleModel: "openrouter/free"
-      modelDisplayLabel: "OpenRouter (Backup)"
-      
+      modelDisplayLabel: "Jesh Backup (OpenRouter)"
