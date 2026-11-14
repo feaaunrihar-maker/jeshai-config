@@ -10,6 +10,14 @@ webSearch:
   scraperType: jina
   safeSearch: 1
 
+mcpServers:
+  github:
+    type: streamable-http
+    url: https://api.githubcopilot.com/mcp/
+    headers:
+      Authorization: "Bearer ${GITHUB_MCP_TOKEN}"
+    timeout: 30000
+
 endpoints:
   custom:
     - name: "Groq"
@@ -18,9 +26,9 @@ endpoints:
       models:
         default:
           - "llama-3.3-70b-versatile"
+          - "openai/gpt-oss-120b"
           - "meta-llama/llama-4-scout-17b-16e-instruct"
-          - "llama-3.2-11b-vision-preview"
-        fetch: true
+        fetch: false
       titleConvo: true
       titleTiming: "immediate"
       titleMethod: "completion"
@@ -38,10 +46,10 @@ endpoints:
           - "openrouter/free"
           - "google/gemma-3-27b-it:free"
           - "meta-llama/llama-3.2-3b-instruct:free"
-          - "mistralai/mistral-small-3.1-24b-instruct:free"
         fetch: false
       titleConvo: true
       titleTiming: "immediate"
       titleMethod: "completion"
       titleModel: "openrouter/free"
       modelDisplayLabel: "OpenRouter (Backup)"
+      
