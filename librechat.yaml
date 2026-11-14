@@ -1,7 +1,6 @@
 version: 1.2.1
 cache: true
 
-# 1. फालतू डिफ़ॉल्ट एंडपॉइंट्स (जैसे खाली OpenAI/Anthropic) छुपाने के लिए
 endpoints:
   custom:
     # --- GROQ (सबसे तेज़ फ्री मॉडल्स: कोडिंग और चैट के लिए) ---
@@ -20,23 +19,24 @@ endpoints:
       titleModel: "llama-3.1-8b-instant"
       modelDisplayLabel: "Groq Free"
 
-    # --- OPENROUTER (अतिरिक्त फ्री और एडवांस मॉडल्स के लिए) ---
+    # --- OPENROUTER (Auto-Switch और अतिरिक्त फ्री मॉडल्स के लिए) ---
     - name: "OpenRouter"
       apiKey: "${OPENROUTER_KEY}"
       baseURL: "https://openrouter.ai/api/v1"
       models:
         default:
+          - "openrouter/free"
           - "google/gemini-2.0-flash-exp:free"
           - "meta-llama/llama-3.3-70b-instruct:free"
           - "qwen/qwen-2.5-coder-32b-instruct:free"
           - "deepseek/deepseek-r1:free"
         fetch: false
       titleConvo: true
-      titleModel: "google/gemini-2.0-flash-exp:free"
+      titleModel: "openrouter/free"
       dropParams: ["stop"]
       modelDisplayLabel: "OpenRouter Free"
 
-# 2. MCP सर्वर इंटीग्रेशन (GitHub और अन्य टूल्स के लिए)
+# --- MCP सर्वर इंटीग्रेशन (GitHub के लिए) ---
 mcpServers:
   github:
     type: sse
