@@ -1,7 +1,17 @@
 version: 1.2.1
 cache: true
 
+# 1. Google Gemini को मेन मॉडल लिस्ट और इमेज जनरेशन दोनों के लिए चालू करना
 endpoints:
+  google:
+    titleConvo: true
+    titleModel: "gemini-2.0-flash"
+    models:
+      default:
+        - "gemini-2.0-flash"
+        - "gemini-1.5-flash"
+      fetch: false
+
   custom:
     # --- GROQ (सबसे तेज़ फ्री मॉडल्स: कोडिंग और चैट के लिए) ---
     - name: "Groq"
@@ -36,11 +46,13 @@ endpoints:
       dropParams: ["stop"]
       modelDisplayLabel: "OpenRouter Free"
 
-# --- MCP सर्वर इंटीग्रेशन (GitHub के लिए) ---
+# 2. MCP सर्वर (GitHub) - Render 512MB RAM और Timeout से बचाने की सेटिंग के साथ
 mcpServers:
   github:
     type: sse
     url: "https://api.githubcopilot.com/mcp/"
+    timeout: 60000
+    initTimeout: 30000
     headers:
       Authorization: "Bearer ${GITHUB_PAT}"
     serverInstructions: "Use this tool to search GitHub repositories, read code, and manage files."
