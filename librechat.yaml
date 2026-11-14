@@ -1,46 +1,47 @@
-version: 1.3.13
+version: 1.2.1
 cache: true
 
-interface:
-  webSearch: true
-  modelSelect: true
-
-webSearch:
-  searchProvider: tavily
-  tavilyApiKey: "${TAVILY_API_KEY}"
-  scraperType: jina
-  safeSearch: 1
-
+# 1. फालतू डिफ़ॉल्ट एंडपॉइंट्स (जैसे खाली OpenAI/Anthropic) छुपाने के लिए
 endpoints:
   custom:
+    # --- GROQ (सबसे तेज़ फ्री मॉडल्स: कोडिंग और चैट के लिए) ---
     - name: "Groq"
       apiKey: "${GROQ_API_KEY}"
-      baseURL: "https://api.groq.com/openai/v1"
-      streamRate: 25
+      baseURL: "https://api.groq.com/openai/v1/"
       models:
         default:
+          - "openai/gpt-oss-120b"
           - "llama-3.3-70b-versatile"
-          - "llama-3.2-11b-vision-preview"
-        fetch: false  # मॉडल्स को ऑटो-फ़ेच करने से रोकें
-      titleConvo: true
-      titleTiming: "immediate"
-      titleMethod: "completion"
-      titleModel: "llama-3.3-70b-versatile"  # टाइटल के लिए सही मॉडल
-      modelDisplayLabel: "Jesh Smart (Groq)"
-
-    - name: "OpenRouter"
-      apiKey: "${OPENROUTER_API_KEY}"
-      baseURL: "https://openrouter.ai/api/v1"
-      streamRate: 25
-      headers:
-        HTTP-Referer: "https://jeshai-librechat.onrender.com"
-        X-Title: "Jesh AI"
-      models:
-        default:
-          - "nvidia/nemotron-3-ultra-550b-a55b:free"  # एक स्पेसिफिक फ्री मॉडल
+          - "llama-3.1-8b-instant"
+          - "qwen-2.5-coder-32b"
+          - "deepseek-r1-distill-llama-70b"
         fetch: false
       titleConvo: true
-      titleTiming: "immediate"
-      titleMethod: "completion"
-      titleModel: "nvidia/nemotron-3-ultra-550b-a55b:free"
-      modelDisplayLabel: "Jesh Backup (OpenRouter)"
+      titleModel: "llama-3.1-8b-instant"
+      modelDisplayLabel: "Groq Free"
+
+    # --- OPENROUTER (अतिरिक्त फ्री और एडवांस मॉडल्स के लिए) ---
+    - name: "OpenRouter"
+      apiKey: "${OPENROUTER_KEY}"
+      baseURL: "https://openrouter.ai/api/v1"
+      models:
+        default:
+          - "google/gemini-2.0-flash-exp:free"
+          - "meta-llama/llama-3.3-70b-instruct:free"
+          - "qwen/qwen-2.5-coder-32b-instruct:free"
+          - "deepseek/deepseek-r1:free"
+        fetch: false
+      titleConvo: true
+      titleModel: "google/gemini-2.0-flash-exp:free"
+      dropParams: ["stop"]
+      modelDisplayLabel: "OpenRouter Free"
+
+# 2. MCP सर्वर इंटीग्रेशन (GitHub और अन्य टूल्स के लिए)
+mcpServers:
+  github:
+    type: sse
+    url: "https://api.githubcopilot.com/mcp/"
+    headers:
+      Authorization: "Bearer ${GITHUB_PAT}"
+    serverInstructions: "Use this tool to search GitHub repositories, read code, and manage files."
+    
