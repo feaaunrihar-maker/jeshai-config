@@ -83,13 +83,4 @@ mcpServers:
       Authorization: "Bearer ${GITHUB_TOKEN}"
     timeout: 30000
     serverInstructions: "Use this tool to read GitHub repositories, inspect skill templates, and manage code files."
-
-# --- PHASE 4: GITHUB SKILLS SYNC (0 MB RAM लोड) ---
-skills:
-  github:
-    token: "${GITHUB_TOKEN}"
-    repositories:
-      - owner: "anthropics"
-        repo: "skills"
-        branch: "main"
-        
+    
