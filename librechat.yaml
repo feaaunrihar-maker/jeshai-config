@@ -25,11 +25,10 @@ endpoints:
       models:
         default:
           - "openai/gpt-oss-120b"
-          - "llama-3.3-70b-versatile"
           - "qwen/qwen3-32b"
         fetch: false
       titleConvo: true
-      titleModel: "openai/gpt-oss-120b" # यहाँ पुराने की जगह नया मॉडल डाला गया है
+      titleModel: "openai/gpt-oss-120b"
       modelDisplayLabel: "Groq Free"
 
     # --- OPENROUTER ---
@@ -52,14 +51,9 @@ endpoints:
 
 # --- REMOTE MCP SERVERS (0 MB RAM लोड) ---
 mcpServers:
-  github:
+  composio:
     type: streamable-http
-    url: "https://api.githubcopilot.com/mcp/"
+    url: "https://connect.composio.dev/mcp"
     headers:
-      Authorization: "Bearer ${GITHUB_MCP_TOKEN}"
-    timeout: 30000
-
-  tavily:
-    type: streamable-http
-    url: "https://mcp.tavily.com/mcp/?tavilyApiKey=${TAVILY_API_KEY}"
+      x-consumer-api-key: "${COMPOSIO_API_KEY}"
     timeout: 30000
