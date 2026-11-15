@@ -1,17 +1,27 @@
 version: 1.3.13
 cache: true
 
+# --- PHASE 3: CLEAN & FOCUSED UI ---
 interface:
+  customWelcome: "Jesh AI में आपका स्वागत है! आज हम किस विषय पर काम करें?"
   webSearch: true
   modelSelect: true
   agents: true
+  endpointsMenu: true
+  parameters: false
+  presets: false
+  prompts: false
+  bookmarks: false
+  multiConvo: false
 
+# --- WEB SEARCH (TAVILY + JINA) ---
 webSearch:
   searchProvider: tavily
   tavilyApiKey: "${TAVILY_API_KEY}"
   scraperType: jina
   safeSearch: 1
 
+# --- AI ENDPOINTS (GROQ & OPENROUTER) ---
 endpoints:
   agents:
     recursionLimit: 15
@@ -49,7 +59,7 @@ endpoints:
       dropParams: ["stop"]
       modelDisplayLabel: "OpenRouter Free"
 
-# --- REMOTE MCP SERVERS (0 MB RAM लोड) ---
+# --- PHASE 4: REMOTE MCP SERVERS (0 MB RAM लोड) ---
 mcpServers:
   composio:
     type: streamable-http
@@ -57,3 +67,29 @@ mcpServers:
     headers:
       x-consumer-api-key: "${COMPOSIO_API_KEY}"
     timeout: 30000
+
+  agnes:
+    type: streamable-http
+    url: "https://mcp.agnes.ai/mcp"
+    headers:
+      Authorization: "Bearer ${AGNES_API_KEY}"
+    timeout: 60000
+    serverInstructions: "Use this tool to generate videos from text prompts whenever the user asks to create or generate a video."
+
+  github:
+    type: sse
+    url: "https://api.githubcopilot.com/mcp/"
+    headers:
+      Authorization: "Bearer ${GITHUB_TOKEN}"
+    timeout: 30000
+    serverInstructions: "Use this tool to read GitHub repositories, inspect skill templates, and manage code files."
+
+# --- PHASE 4: GITHUB SKILLS SYNC (0 MB RAM लोड) ---
+skills:
+  github:
+    token: "${GITHUB_TOKEN}"
+    repositories:
+      - owner: "anthropics"
+        repo: "skills"
+        branch: "main"
+        
