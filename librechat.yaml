@@ -14,8 +14,7 @@ interface:
   bookmarks: false
   multiConvo: false
 
-# --- VOICE CHAT: RECORD FIRST, MANUAL SEND ---
-# --- VOICE CHAT: RECORD FIRST, MANUAL SEND ---
+# --- VOICE CHAT: CLEAN & 100% VALID SCHEMA ---
 speech:
   stt:
     openai:
@@ -24,18 +23,6 @@ speech:
       model: "whisper-large-v3-turbo"
   tts:
     edge: true
-  speechTab:
-    conversationMode: false
-    advancedMode: false
-    speechToText:
-      engineSTT: "external"
-      languageSTT: "hi-IN"
-      autoTranscribeAudio: false
-      autoSendText: -1
-    textToSpeech:
-      automaticPlayback: true
-      voice: "hi-IN-SwaraNeural"
-
 
 # --- 512MB RAM PROTECTION: SCREENSHOT, CAMERA & PDF VISION ---
 fileConfig:
