@@ -15,6 +15,7 @@ interface:
   multiConvo: false
 
 # --- VOICE CHAT: RECORD FIRST, MANUAL SEND ---
+# --- VOICE CHAT: RECORD FIRST, MANUAL SEND ---
 speech:
   stt:
     openai:
@@ -22,8 +23,7 @@ speech:
       url: "https://api.groq.com/openai/v1/audio/transcriptions"
       model: "whisper-large-v3-turbo"
   tts:
-    edge:
-      voice: "hi-IN-SwaraNeural"
+    edge: true
   speechTab:
     conversationMode: false
     advancedMode: false
@@ -33,9 +33,9 @@ speech:
       autoTranscribeAudio: false
       autoSendText: -1
     textToSpeech:
-      engineTTS: "external"
       automaticPlayback: true
       voice: "hi-IN-SwaraNeural"
+
 
 # --- 512MB RAM PROTECTION: SCREENSHOT, CAMERA & PDF VISION ---
 fileConfig:
