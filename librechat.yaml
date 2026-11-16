@@ -21,27 +21,37 @@ webSearch:
   scraperType: jina
   safeSearch: 1
 
-# --- AI ENDPOINTS (GROQ & OPENROUTER) ---
+# --- PHASE 6: TRIPLE-ENGINE AI ENDPOINTS (GEMINI + GROQ + OPENROUTER) ---
 endpoints:
   agents:
     recursionLimit: 15
     maxRecursionLimit: 25
+
+  # 1. GOOGLE GEMINI (मुख्य इंजन - विशाल कॉन्टेक्स्ट विंडो)
+  google:
+    models:
+      default:
+        - "gemini-2.5-flash"
+        - "gemini-2.5-pro"
+      fetch: false
+
   custom:
-    # --- GROQ ---
+    # 2. GROQ (सिर्फ सक्रिय और तेज़ मॉडल्स)
     - name: "Groq"
       apiKey: "${GROQ_API_KEY}"
       baseURL: "https://api.groq.com/openai/v1/"
       streamRate: 25
       models:
         default:
+          - "llama-3.3-70b-versatile"
+          - "llama-3.1-8b-instant"
           - "openai/gpt-oss-120b"
-          - "qwen/qwen3-32b"
         fetch: false
       titleConvo: true
-      titleModel: "openai/gpt-oss-120b"
+      titleModel: "llama-3.1-8b-instant"
       modelDisplayLabel: "Groq Free"
 
-    # --- OPENROUTER ---
+    # 3. OPENROUTER (सिर्फ भरोसेमंद फ्री राउटर, फालतू मॉडल्स हटा दिए गए हैं)
     - name: "OpenRouter"
       apiKey: "${OPENROUTER_KEY}"
       baseURL: "https://openrouter.ai/api/v1"
@@ -49,9 +59,6 @@ endpoints:
       models:
         default:
           - "openrouter/free"
-          - "google/gemini-2.0-flash-exp:free"
-          - "meta-llama/llama-3.3-70b-instruct:free"
-          - "qwen/qwen-2.5-coder-32b-instruct:free"
           - "deepseek/deepseek-r1:free"
         fetch: false
       titleConvo: true
