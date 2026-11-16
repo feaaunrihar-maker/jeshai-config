@@ -14,7 +14,7 @@ interface:
   bookmarks: false
   multiConvo: false
 
-# --- LIVE MIC (STT) & AUDIO VOICE CHAT (TTS) ---
+# --- VOICE CHAT: RECORD FIRST, MANUAL SEND ---
 speech:
   stt:
     openai:
@@ -25,13 +25,13 @@ speech:
     edge:
       voice: "hi-IN-SwaraNeural"
   speechTab:
-    conversationMode: true
+    conversationMode: false
     advancedMode: false
     speechToText:
       engineSTT: "external"
       languageSTT: "hi-IN"
-      autoTranscribeAudio: true
-      autoSendText: 2
+      autoTranscribeAudio: false
+      autoSendText: -1
     textToSpeech:
       engineTTS: "edge"
       automaticPlayback: true
@@ -55,7 +55,7 @@ webSearch:
   scraperType: jina
   safeSearch: 1
 
-# --- PHASE 6: TRIPLE-ENGINE AI ENDPOINTS ---
+# --- TRIPLE-ENGINE AI ENDPOINTS (GEMINI + GROQ + OPENROUTER) ---
 endpoints:
   agents:
     recursionLimit: 15
@@ -75,10 +75,9 @@ endpoints:
       streamRate: 25
       models:
         default:
-          - "llama-3.3-70b-versatile"
-          - "llama-3.1-8b-instant"
           - "openai/gpt-oss-120b"
-        fetch: false
+          - "llama-3.1-8b-instant"
+        fetch: true
       titleConvo: true
       titleModel: "llama-3.1-8b-instant"
       modelDisplayLabel: "Groq Free"
@@ -97,7 +96,7 @@ endpoints:
       dropParams: ["stop"]
       modelDisplayLabel: "OpenRouter Free"
 
-# --- PHASE 4: REMOTE MCP SERVERS (0 MB RAM लोड) ---
+# --- PHASE 4 & 5: REMOTE MCP SERVERS (0 MB RAM लोड) ---
 mcpServers:
   composio:
     type: streamable-http
