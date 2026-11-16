@@ -14,6 +14,40 @@ interface:
   bookmarks: false
   multiConvo: false
 
+# --- LIVE MIC (STT) & AUDIO VOICE CHAT (TTS) ---
+speech:
+  stt:
+    openai:
+      apiKey: "${GROQ_API_KEY}"
+      url: "https://api.groq.com/openai/v1/audio/transcriptions"
+      model: "whisper-large-v3-turbo"
+  tts:
+    edge:
+      voice: "hi-IN-SwaraNeural"
+  speechTab:
+    conversationMode: true
+    advancedMode: false
+    speechToText:
+      engineSTT: "external"
+      languageSTT: "hi-IN"
+      autoTranscribeAudio: true
+      autoSendText: 2
+    textToSpeech:
+      engineTTS: "edge"
+      automaticPlayback: true
+      voice: "hi-IN-SwaraNeural"
+
+# --- 512MB RAM PROTECTION: FILE & VISION UPLOAD LIMITS ---
+fileConfig:
+  endpoints:
+    google:
+      fileLimit: 5
+      fileSizeLimit: 10
+    agents:
+      fileLimit: 5
+      fileSizeLimit: 10
+  serverFileSizeLimit: 15
+
 # --- WEB SEARCH (TAVILY + JINA) ---
 webSearch:
   searchProvider: tavily
@@ -21,13 +55,12 @@ webSearch:
   scraperType: jina
   safeSearch: 1
 
-# --- PHASE 6: TRIPLE-ENGINE AI ENDPOINTS (GEMINI + GROQ + OPENROUTER) ---
+# --- PHASE 6: TRIPLE-ENGINE AI ENDPOINTS ---
 endpoints:
   agents:
     recursionLimit: 15
     maxRecursionLimit: 25
 
-  # 1. GOOGLE GEMINI (मुख्य इंजन - विशाल कॉन्टेक्स्ट विंडो)
   google:
     models:
       default:
@@ -36,7 +69,6 @@ endpoints:
       fetch: false
 
   custom:
-    # 2. GROQ (सिर्फ सक्रिय और तेज़ मॉडल्स)
     - name: "Groq"
       apiKey: "${GROQ_API_KEY}"
       baseURL: "https://api.groq.com/openai/v1/"
@@ -51,7 +83,6 @@ endpoints:
       titleModel: "llama-3.1-8b-instant"
       modelDisplayLabel: "Groq Free"
 
-    # 3. OPENROUTER (सिर्फ भरोसेमंद फ्री राउटर, फालतू मॉडल्स हटा दिए गए हैं)
     - name: "OpenRouter"
       apiKey: "${OPENROUTER_KEY}"
       baseURL: "https://openrouter.ai/api/v1"
