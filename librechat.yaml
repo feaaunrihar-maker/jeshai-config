@@ -33,7 +33,7 @@ speech:
       autoTranscribeAudio: false
       autoSendText: -1
     textToSpeech:
-      engineTTS: "edge"
+      engineTTS: "external"
       automaticPlayback: true
       voice: "hi-IN-SwaraNeural"
 
